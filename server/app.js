@@ -1,3 +1,4 @@
+// entry point - router
 var express = require('express');
 var db = require('./db');
 
