@@ -3,20 +3,17 @@ var db = require('../db');
 module.exports = {
   getAll: function (callback) {
     var queryStr = "SELECT * FROM users";
-    // db.connection.query vs connection.query vs db.query?
-    connection.query(queryStr, (err, result) => {
+    db.query(queryStr, (err, result) => {
       if (err) {
         callback(err);
       } else {
-        callback(null, result);
+        callback(null, result.toString());
       }
     })
-
-
   },
   create: function (newUser, callback) {
-    var sql = `INSERT INTO user ( name ) VALUES ( ${newUser})`;
-    connection.query(sql, (err) => {
+    var sql = `INSERT INTO user ( name ) VALUES ( '${newUser}' )`;
+    db.query(sql, (err) => {
       if (err) {
         console.log('error at create', err);
         callback(err);

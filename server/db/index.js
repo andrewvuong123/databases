@@ -11,19 +11,19 @@ var connection = mysql.createConnection({
   password : '',
   database : 'chat'
 });
-
+// now server connected to mysql
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-});
+// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+//   if (error) throw error;
+//   console.log('The solution is: ', results[0].solution);
+// });
 
-connection.end();
+// connection.end();  // when to end?
 
 // ??
-//module.exports.connection;
-module.exports = connection;
+//module.exports.connection = connection;     / <= key
+module.exports = connection;  //<= exporting whole obj
 
 
 

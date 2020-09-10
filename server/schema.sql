@@ -5,27 +5,33 @@ USE chat;
 
 CREATE TABLE user (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NULL,
+  username VARCHAR(50) NULL,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE rooms (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NULL,
-  PRIMARY KEY (id)
-);
+-- CREATE TABLE rooms (
+--   id INTEGER NOT NULL AUTO_INCREMENT,
+--   name VARCHAR(50) NULL,
+--   PRIMARY KEY (id)
+-- );
 
 CREATE TABLE messages (
   /* Describe your table here.*/
   id INTEGER NOT NULL AUTO_INCREMENT,
-  text VARCHAR(150),
+  message VARCHAR(150),
   user_id INTEGER,
-  room_id INTEGER,
-  date DATE NULL,
+  roomname VARCHAR(50),
   PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES user (id),
-  FOREIGN KEY (room_id) REFERENCES rooms (id)
+  FOREIGN KEY (user_id) REFERENCES user (id)
+  -- FOREIGN KEY (room_id) REFERENCES rooms (id)
 );
+
+INSERT INTO user ( username ) VALUES ('Alex');
+-- INSERT INTO rooms ( name ) VALUES ('lobby');
+INSERT INTO messages ( message, user_id, roomname) VALUES ('hi', 1, 'lobby');
+INSERT INTO messages ( message, user_id, roomname) VALUES ('message', 1, 'classroom');
+
+
 
 /* Create other tables and define schemas for them here! */
 
