@@ -2,7 +2,7 @@ var db = require('../db');
 
 module.exports = {
   getAll: function (callback) {
-    var queryStr = "SELECT * FROM users";
+    var queryStr = "SELECT * FROM user";
     db.query(queryStr, (err, result) => {
       if (err) {
         callback(err);
@@ -12,7 +12,7 @@ module.exports = {
     })
   },
   create: function (newUser, callback) {
-    var sql = `INSERT INTO user ( name ) VALUES ( '${newUser}' )`;
+    var sql = `INSERT INTO user ( username ) VALUES ( '${newUser}' )`;
     db.query(sql, (err) => {
       if (err) {
         console.log('error at create', err);

@@ -11,7 +11,8 @@ module.exports = {
         console.log(err);
       } else {
         res.statusCode = 200;
-        res.end(data);
+        res.json(data);
+        // res.end(data);
       }
     })
 
@@ -20,15 +21,15 @@ module.exports = {
   post: function (req, res) {
     // call model's create
     console.log('post request of user:');
-    var newUser = req.query.username;
-    models.create(newUser, (err, data) => {
+    var params = req.body.username;
+    models.create(params, (err, data) => {
       if (err) {
         res.statusCode = 500;
         console.log(err);
       } else {
         res.statusCode = 200;
         // res.write(data);
-        res.end();
+        // res.end();
       }
     })
   }

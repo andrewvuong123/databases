@@ -12,21 +12,19 @@ module.exports = {
         console.log(err);
       } else {
         res.statusCode = 200;
-        res.end(data);
+        // res.end(data);
+        res.json(data);
+        // res.end();
       }
     });
   },
 
   post: function (req, res) { // a function which handles posting a message to the database
     // call models's create()
-    console.log('post request of message in controller: req.query', req.query);
-    console.log('post request of message in controller: req.query.message', req.query.message);
-    console.log('post request of message in controller: req.json', req.json);
-    // console.log('post request of message in controller: req.body', req.body);
-    // console.log('post request of message in controller: req.body.message', req.body.message);
-    // console.log('post request of message in controller: req.params', req.params);
-    var newMessage = req.query.message;
-    modelsMsg.create(newMessage, (err, data) => {
+    // console.log('post request of message in controller: req.query', req.query);
+    console.log('post request of message in controller: req.body', req.body); // when we send message in postman => select body , json format, {key : value}
+    var params = [req.body.message, req.body.username, req.body.roomname] ;
+    modelsMsg.create(params, (err, data) => {
     // modelsMsg.create(newMessage, (err, data) => {
       if (err) {
         res.statusCode = 500;
@@ -34,10 +32,9 @@ module.exports = {
       } else {
         res.statusCode = 200;
         console.log('post of message success')
-        // res.write(data);
-        res.end();
+        // // res.write(data);
+        // res.end();
       }
     })
-
   }
 };

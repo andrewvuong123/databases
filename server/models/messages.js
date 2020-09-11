@@ -6,7 +6,8 @@ module.exports = {
   //// a function which produces all the messages
   getAll: function (callback) {
     // send query to mysql database asychronously
-    db.query('SELECT text FROM messages', (err, data) => {
+    var sqlQuery = 'SELECT text FROM messages'
+    db.query(sqlQuery, (err, data) => {
       if (err) {
         console.log('error at getAll:', err)
         callback(err);
@@ -18,8 +19,10 @@ module.exports = {
     });
   },
 
-  create: function (newMessage, callback) {
-    db.query(`INSERT INTO messages ( text, user_id, room_id) VALUES ( '${newMessage}', 1, 1)`, (err) => {
+  create: function (params, callback) {
+    var sqlQuery = `INSERT INTO messages ( text, user_id, roomname) VALUES ( ?, ?, ? )`
+
+    db.query(sqlQuery, params, (err) => {
       if (err) {
         console.log('error at create:', err)
         callback(err);
