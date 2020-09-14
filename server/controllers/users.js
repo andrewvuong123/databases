@@ -2,35 +2,25 @@ var models = require('../models/users.js');
 
 module.exports = {
   get: function (req, res) {
-    console.log('get request of user:')
-
-    // call model's getAll fn
+    // call user getAll fn
     models.getAll((err, data) => {
       if (err) {
-        res.statusCode = 500;
-        console.log(err);
+        res.status(500).send(err);
       } else {
-        res.statusCode = 200;
-        res.json(data);
-        // res.end(data);
+        res.status(200).json(data);
       }
-    })
-
-
+    });
   },
   post: function (req, res) {
-    // call model's create
-    console.log('post request of user:');
-    var params = req.body.username;
-    models.create(params, (err, data) => {
+    // call user create
+    var user = req.body.username;
+    models.create(user, (err, data) => {
       if (err) {
-        res.statusCode = 500;
         console.log(err);
+        res.status(201).send(err);
       } else {
-        res.statusCode = 200;
-        // res.write(data);
-        // res.end();
+        res.status(200).end();
       }
-    })
+    });
   }
 };

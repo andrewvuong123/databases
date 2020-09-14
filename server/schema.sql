@@ -18,25 +18,20 @@ CREATE TABLE user (
 CREATE TABLE messages (
   /* Describe your table here.*/
   id INTEGER NOT NULL AUTO_INCREMENT,
-  message VARCHAR(150),
-  user_id INTEGER,
+  text VARCHAR(150),
+  userid INTEGER,
   roomname VARCHAR(50),
   PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES user (id)
+  FOREIGN KEY (userid) REFERENCES user (id)
   -- FOREIGN KEY (room_id) REFERENCES rooms (id)
 );
 
-INSERT INTO user ( username ) VALUES ('Alex');
--- INSERT INTO rooms ( name ) VALUES ('lobby');
-INSERT INTO messages ( message, user_id, roomname) VALUES ('hi', 1, 'lobby');
-INSERT INTO messages ( message, user_id, roomname) VALUES ('message', 1, 'classroom');
-
-
+-- INSERT INTO user ( username ) VALUES ('Alex');
+-- -- INSERT INTO rooms ( name ) VALUES ('lobby');
+-- INSERT INTO messages ( message, user_id, roomname) VALUES ('hi', 1, 'lobby');
+-- INSERT INTO messages ( message, user_id, roomname) VALUES ('message', 1, 'classroom');
 
 /* Create other tables and define schemas for them here! */
-
-
-
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql

@@ -4,25 +4,16 @@ var mysql = require('mysql');
 // You will need to connect with the user "root", no password,
 // and to the database "chat".
 
-
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'chat'
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'chat'
 });
 // now server connected to mysql
 connection.connect();
 
-// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
-// });
 
-// connection.end();  // when to end?
-
-// ??
-//module.exports.connection = connection;     / <= key
 module.exports = connection;  //<= exporting whole obj
 
 

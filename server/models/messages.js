@@ -1,46 +1,27 @@
-// model : talking to db
+// model : interact with db
 var db = require('../db');
-// db.query
 
 module.exports = {
-  //// a function which produces all the messages
+  // fetch all messages (text, username, roomname, id)
   getAll: function (callback) {
-    // send query to mysql database asychronously
-    var sqlQuery = 'SELECT text FROM messages'
+    var sqlQuery = 'SELECT messages.text, messages.id, messages.roomname, user.username FROM messages LEFT OUTER JOIN user ON (messages.userid = user.id)';
     db.query(sqlQuery, (err, data) => {
       if (err) {
-        console.log('error at getAll:', err)
         callback(err);
-
       } else {
-        console.log('getAll success:', JSON.stringify(data));
-        callback(null, JSON.stringify(data));
+        callback(null, data);
       }
     });
   },
-
+  // create a message for a user id based on the given username
   create: function (params, callback) {
-    var sqlQuery = `INSERT INTO messages ( text, user_id, roomname) VALUES ( ?, ?, ? )`
-
+    var sqlQuery = 'INSERT INTO messages ( text, userid, roomname) VALUE ( ?, (SELECT id from user where username = ? limit 1), ? )';
     db.query(sqlQuery, params, (err) => {
       if (err) {
-        console.log('error at create:', err)
         callback(err);
       } else {
-        console.log('create success:')
         callback(null);
       }
     });
-  } // a function which can be used to insert a message into the database
+  }
 };
-
-
-
-// module.exports = {
-//   getAll, create
-// }
-
-// module.exports = {
-//   getAll:getAll,
-//   create:create
-// }
